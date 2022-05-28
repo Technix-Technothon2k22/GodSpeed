@@ -1,0 +1,28 @@
+{
+  "name": "hackarena-tehnothon",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@chakra-ui/react": "^2.1.2",
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1",
+    "dayjs": "^1.11.2",
+    "framer-motion": "^6.3.4",
+    "mongoose": "^6.3.4",
+    "next": "12.1.6",
+    "next-auth": "^4.3.4",
+    "react": "18.1.0",
+    "react-dom": "18.1.0",
+    "react-icons": "^4.3.1"
+  },
+  "devDependencies": {
+    "eslint": "8.16.0",
+    "eslint-config-next": "12.1.6"
+  }
+}
