@@ -7,8 +7,9 @@ import { AiOutlinePlus } from 'react-icons/ai';
 import HackathonsByOrg from '../../components/dashboard/HackathonsByOrg';
 import Link from 'next/link';
 
-function DashboardPage({ hackathons }) {
+function DashboardPage({ hackathons, data2 }) {
   let data = JSON.parse(hackathons);
+  let parsedData2 = JSON.parse(data2);
 
   return (
     <Center>
@@ -25,7 +26,7 @@ function DashboardPage({ hackathons }) {
         </HStack>
 
         {/* List of hackathons the organiser has created */}
-        <HackathonsByOrg data={data} />
+        <HackathonsByOrg data={data} ic={parsedData2} />
       </DashboardLayout>
     </Center>
   );
@@ -46,6 +47,7 @@ export async function getServerSideProps(context) {
 
   // console.log(session.user.email);
   let data;
+  let data2;
   try {
     const response = await fetch(
       process.env.NEXT_PUBLIC_BASE_URL +
@@ -64,11 +66,30 @@ export async function getServerSideProps(context) {
     console.log(err);
   }
 
-  console.log(data);
+  // console.log(data);
+
+  try {
+    const reponse = await fetch(
+      process.env.NEXT_PUBLIC_BASE_URL + `/api/fetch-interest-count`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          // 'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
+      }
+    );
+
+    data2 = await reponse.json();
+    console.log(data2);
+  } catch (error) {
+    console.log(error);
+  }
 
   return {
     props: {
       hackathons: JSON.stringify(data.data) || null,
+      data2: JSON.stringify(data2),
     },
   };
 }

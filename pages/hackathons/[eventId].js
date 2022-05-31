@@ -5,7 +5,7 @@ function HackathonDetailsPage({ data, data2 }) {
   const parsedData = JSON.parse(data);
   const parsedData2 = JSON.parse(data2);
 
-  console.log(parsedData);
+  // console.log(parsedData);
 
   return (
     <div>

@@ -9,11 +9,12 @@ import HackathonAnalytics from '../../components/dashboard/analytics/HackathonAn
 
 import { AiFillAlert } from 'react-icons/ai';
 
-function AdminEventPage({ data, data2 }) {
+function AdminEventPage({ data, data2, data3 }) {
   const parsedData = JSON.parse(data);
   const parsedData2 = JSON.parse(data2);
+  const parsedData3 = JSON.parse(data3);
 
-  console.log(parsedData2);
+  console.log(parsedData3);
 
   dayjs.extend(require('dayjs/plugin/relativeTime'));
 
@@ -43,7 +44,7 @@ function AdminEventPage({ data, data2 }) {
             </Button>
           </Stack>
 
-          <HackathonAnalytics />
+          <HackathonAnalytics ic={parsedData3.data} eventId={parsedData._id} />
 
           {/* Make announcement component */}
           <AnnouncementComponent eventId={parsedData._id} />
@@ -71,6 +72,7 @@ export async function getServerSideProps(context) {
   }
 
   let data;
+  let data3;
 
   try {
     const response = await fetch(
@@ -109,10 +111,29 @@ export async function getServerSideProps(context) {
     console.log(err);
   }
 
+  try {
+    const reponse = await fetch(
+      process.env.NEXT_PUBLIC_BASE_URL + `/api/fetch-interest-count`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          // 'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
+      }
+    );
+
+    data3 = await reponse.json();
+    console.log(data3);
+  } catch (error) {
+    console.log(error);
+  }
+
   return {
     props: {
       data: JSON.stringify(data[0]),
       data2: JSON.stringify(data2),
+      data3: JSON.stringify(data3),
     },
   };
 }

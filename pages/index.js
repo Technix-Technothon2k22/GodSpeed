@@ -10,7 +10,6 @@ function Home() {
           name="description"
           content="One stop solution for managing your hackathons"
         />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <EntryComponent />

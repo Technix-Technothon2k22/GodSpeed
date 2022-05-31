@@ -13,7 +13,7 @@ import AlertBox from './AlertBox';
 import { HiArrowNarrowRight } from 'react-icons/hi';
 import NextLink from 'next/link';
 
-function Hackathon({ hackathonData, shouldDelete }) {
+function Hackathon({ hackathonData, shouldDelete, ic }) {
   const { isOpen, onClose, onOpen } = useDisclosure();
 
   // console.log(hackathonData._id);
@@ -43,7 +43,7 @@ function Hackathon({ hackathonData, shouldDelete }) {
         )}
 
         {/* Stats */}
-        <StatsComponent data={hackathonData} />
+        <StatsComponent ic={ic} data={hackathonData} />
       </Stack>
 
       {shouldDelete && (

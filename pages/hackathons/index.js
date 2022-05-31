@@ -1,11 +1,9 @@
 import Head from 'next/head';
 import Entry from '../../components/hackathons-list-page/Entry';
-import Hackathon from '../../models/HackathonModel';
-import dbConnect from '../../utils/dbConnect';
 
-function HackathonsListPage({ data }) {
+function HackathonsListPage({ data, data2 }) {
   const parsedData = JSON.parse(data);
-  console.log(parsedData);
+  const parsedData2 = JSON.parse(data2);
 
   return (
     <div>
@@ -13,13 +11,14 @@ function HackathonsListPage({ data }) {
         <title>Hackathons</title>
       </Head>
 
-      <Entry data={parsedData} />
+      <Entry data={parsedData} ic={parsedData2} />
     </div>
   );
 }
 
 export async function getServerSideProps() {
   let data;
+  let data2;
   try {
     const response = await fetch(
       process.env.NEXT_PUBLIC_BASE_URL + '/api/get-all-events',
@@ -38,9 +37,28 @@ export async function getServerSideProps() {
     console.log(error);
   }
 
+  try {
+    const reponse = await fetch(
+      process.env.NEXT_PUBLIC_BASE_URL + `/api/fetch-interest-count`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          // 'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
+      }
+    );
+
+    data2 = await reponse.json();
+    // console.log(data2);
+  } catch (error) {
+    console.log(error);
+  }
+
   return {
     props: {
       data: JSON.stringify(data.hackathons),
+      data2: JSON.stringify(data2),
     },
   };
 }

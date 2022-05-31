@@ -23,7 +23,7 @@ function HackathonDetailsComponent({ data, announcements }) {
         <DetailedDescription data={data[0]} />
 
         {/* Registration for interested People */}
-        <Interested />
+        <Interested eventId={data[0]._id} />
 
         {/* FAQs */}
         <FaqsPage faqs={data[0]} />

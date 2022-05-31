@@ -1,6 +1,5 @@
 import { Box, HStack, Stack, Text, IconButton } from '@chakra-ui/react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { BsWhatsapp, BsInstagram, BsTwitter, BsGlobe } from 'react-icons/bs';
 
 function OrganizerDetails({ data }) {
@@ -43,7 +42,11 @@ function OrganizerDetails({ data }) {
       {/* Socials */}
       <Stack direction={'row'} alignItems={'center'}>
         {data.twitter && (
-          <a target="_blank" href={data.twitter} rel="noreferrer">
+          <a
+            target="_blank"
+            href={`https://twitter.com/${data.twitter}`}
+            rel="noreferrer"
+          >
             <IconButton
               bg="twitter.100"
               _hover={{
@@ -55,7 +58,11 @@ function OrganizerDetails({ data }) {
         )}
 
         {data.instagram && (
-          <a target="_blank" href={data.instagram} rel="noreferrer">
+          <a
+            target="_blank"
+            href={`https://www.instagram.com/${data.instagram}`}
+            rel="noreferrer"
+          >
             <IconButton
               bg="twitter.100"
               _hover={{
@@ -67,7 +74,7 @@ function OrganizerDetails({ data }) {
         )}
 
         {data.whatsapp && (
-          <a target="_blank" href={data.whatsapp} rel="noreferrer" passHref>
+          <a target="_blank" href={data.whatsapp} rel="noreferrer">
             <IconButton
               bg="twitter.100"
               _hover={{
@@ -79,12 +86,7 @@ function OrganizerDetails({ data }) {
         )}
 
         {data.organiserPage && (
-          <a
-            target="_blank"
-            href={data.organiserPage}
-            rel="noreferrer"
-            passHref
-          >
+          <a target="_blank" href={data.organiserPage} rel="noreferrer">
             <IconButton
               bg="twitter.100"
               _hover={{

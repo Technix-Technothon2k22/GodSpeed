@@ -1,7 +1,7 @@
 import { Stack, Text } from '@chakra-ui/react';
 import Hackathon from '../ui/Hackathon';
 
-function HackathonsByOrg({ data }) {
+function HackathonsByOrg({ data, ic }) {
   return (
     <Stack
       style={{
@@ -15,6 +15,7 @@ function HackathonsByOrg({ data }) {
               shouldDelete={true}
               key={index}
               hackathonData={hackathon}
+              ic={ic}
             />
           );
         })
